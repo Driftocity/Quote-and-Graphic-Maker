@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quote & Flyer Graphic Maker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14151d;
+    --ink-2:#1c1e29;
+    --panel:#20222f;
+    --gold:#c9a227;
+    --gold-soft:#e3c866;
+    --cream:#f4efe2;
+    --muted:#9a9cae;
+    --line:#33354a;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--ink);
+    color:var(--cream);
+    font-family:'Work Sans',sans-serif;
+    min-height:100vh;
+    padding:20px 16px 60px;
+  }
+  .wrap{max-width:520px;margin:0 auto;}
+
+  header{text-align:center;margin-bottom:22px;position:relative;}
+  .eyebrow{
+    font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--gold-soft);margin-bottom:6px;font-weight:600;
+  }
+  h1{
+    font-family:'Fraunces',serif;font-weight:600;font-size:26px;
+    margin:0 0 8px;line-height:1.15;
+  }
+  .rule{
+    width:64px;height:2px;margin:14px auto 0;
+    background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  }
+  p.sub{color:var(--muted);font-size:13.5px;margin:10px auto 0;max-width:340px;line-height:1.5;}
+
+  .sizes{display:flex;gap:8px;margin:22px 0 14px;}
+  .size-btn{
+    flex:1;padding:10px 6px;border-radius:10px;border:1px solid var(--line);
+    background:var(--panel);color:var(--muted);font-size:12.5px;font-weight:600;
+    cursor:pointer;transition:.15s;text-align:center;
+  }
+  .size-btn.active{border-color:var(--gold);color:var(--gold-soft);background:#262a1c;}
+
+  .canvas-shell{
+    position:relative;border-radius:16px;overflow:hidden;
+    box-shadow:0 20px 50px -20px rgba(0,0,0,.6), 0 0 0 1px var(--line);
+    background:#000;
+  }
+  canvas{display:block;width:100%;height:auto;}
+
+  .glow{
+    position:absolute;inset:-40%;
+    background:radial-gradient(circle at 50% 40%, rgba(201,162,39,.18), transparent 60%);
+    pointer-events:none;z-index:-1;
+  }
+
+  section{margin-top:26px;}
+  label{
+    display:block;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--gold-soft);font-weight:600;margin-bottom:8px;
+  }
+  textarea, input[type=text]{
+    width:100%;background:var(--panel);border:1px solid var(--line);
+    color:var(--cream);border-radius:10px;padding:12px 14px;
+    font-family:'Work Sans',sans-serif;font-size:15px;resize:vertical;
+  }
+  textarea{min-height:84px;line-height:1.4;}
+  textarea:focus, input:focus{outline:none;border-color:var(--gold);}
+
+  .row2{display:flex;gap:10px;margin-top:16px;}
+  .row2 > div{flex:1;}
+
+  .swatches{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px;}
+  .swatch{
+    width:52px;height:52px;border-radius:10px;cursor:pointer;
+    border:2px solid transparent;position:relative;flex-shrink:0;
+  }
+  .swatch.active{border-color:var(--gold);}
+  .swatch span{
+    position:absolute;bottom:-18px;left:0;right:0;text-align:center;
+    font-size:9.5px;color:var(--muted);
+  }
+
+  .btnrow{display:flex;gap:10px;margin-top:30px;}
+  button.primary{
+    flex:1;background:var(--gold);color:#1a1a12;border:none;border-radius:12px;
+    padding:15px;font-size:15px;font-weight:700;cursor:pointer;
+    font-family:'Work Sans',sans-serif;letter-spacing:.02em;
+  }
+  button.ghost{
+    background:transparent;border:1px solid var(--line);color:var(--cream);
+    border-radius:12px;padding:15px 18px;font-size:14px;cursor:pointer;
+    font-weight:600;
+  }
+  button:active{transform:scale(.98);}
+
+  footer{text-align:center;margin-top:34px;color:var(--muted);font-size:11.5px;line-height:1.6;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">Free &amp; Instant</div>
+    <h1>Quote &amp; Flyer<br>Graphic Maker</h1>
+    <div class="rule"></div>
+    <p class="sub">Type it, pick a look, download. No design skills, no waiting — perfect for social posts, flyers, and quote graphics on the fly.</p>
+  </header>
+
+  <div class="sizes" id="sizes"></div>
+
+  <div class="canvas-shell">
+    <div class="glow"></div>
+    <canvas id="cv"></canvas>
+  </div>
+
+  <section>
+    <label for="verse">Quote or message</label>
+    <textarea id="verse" maxlength="220">The best way to predict the future is to create it.</textarea>
+  </section>
+
+  <section>
+    <label for="ref">Attribution (optional)</label>
+    <input type="text" id="ref" maxlength="60" value="Peter Drucker">
+  </section>
+
+  <section>
+    <label>Background</label>
+    <div class="swatches" id="swatches"></div>
+  </section>
+
+  <section>
+    <label for="brand">Bottom brand line (optional)</label>
+    <input type="text" id="brand" maxlength="40" value="Your Name or Brand">
+  </section>
+
+  <div class="btnrow">
+    <button class="ghost" id="shuffle">Shuffle look</button>
+    <button class="primary" id="download">Download image</button>
+  </div>
+
+  <footer>Renders on your device. Nothing uploaded, nothing to wait on.<br>Built by Driftocity.</footer>
+</div>
+
+<script>
+const SIZES = [
+  {key:'square', label:'Post', w:1080, h:1080},
+  {key:'story',  label:'Story', w:1080, h:1920},
+  {key:'flyer',  label:'Flyer', w:1200, h:1500},
+];
+
+const THEMES = [
+  {
+    key:'morning', label:'Morning',
+    bg:['#3a2a12','#c9a227','#f4d78a'], mode:'radial-warm', text:'#fffaf0', accent:'#f4d78a'
+  },
+  {
+    key:'evening', label:'Evening',
+    bg:['#141225','#2c2451','#4a3a7a'], mode:'radial-cool', text:'#f4efe2', accent:'#c9a227'
+  },
+  {
+    key:'newday', label:'New Day',
+    bg:['#7a3b2e','#c9683f','#f0b06a'], mode:'diagonal', text:'#fff6ec', accent:'#ffe7c2'
+  },
+  {
+    key:'stillness', label:'Stillness',
+    bg:['#1f2e26','#3c5c48','#89a68a'], mode:'radial-warm', text:'#f4efe2', accent:'#d9c98a'
+  },
+  {
+    key:'faith', label:'Bold',
+    bg:['#1a0f14','#5c1f2e','#8a2f3f'], mode:'diagonal', text:'#f4efe2', accent:'#c9a227'
+  },
+  {
+    key:'simple', label:'Simple',
+    bg:['#efe9d8','#f4efe2','#fbf7ec'], mode:'radial-light', text:'#26241c', accent:'#a9871f'
+  },
+];
+
+let currentSize = SIZES[0];
+let currentTheme = THEMES[0];
+
+const cv = document.getElementById('cv');
+const ctx = cv.getContext('2d');
+
+function buildSizeButtons(){
+  const el = document.getElementById('sizes');
+  SIZES.forEach(s=>{
+    const b = document.createElement('div');
+    b.className = 'size-btn' + (s.key===currentSize.key?' active':'');
+    b.textContent = s.label + ' ' + s.w + '×' + s.h;
+    b.onclick = ()=>{ currentSize = s;
+      document.querySelectorAll('.size-btn').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');
+      render();
+    };
+    el.appendChild(b);
+  });
+}
+
+function buildSwatches(){
+  const el = document.getElementById('swatches');
+  THEMES.forEach(t=>{
+    const s = document.createElement('div');
+    s.className = 'swatch' + (t.key===currentTheme.key?' active':'');
+    s.style.background = `linear-gradient(135deg, ${t.bg[0]}, ${t.bg[1]}, ${t.bg[2]})`;
+    const lbl = document.createElement('span');
+    lbl.textContent = t.label;
+    s.appendChild(lbl);
+    s.onclick = ()=>{ currentTheme = t;
+      document.querySelectorAll('.swatch').forEach(x=>x.classList.remove('active'));
+      s.classList.add('active');
+      render();
+    };
+    el.appendChild(s);
+  });
+}
+
+function wrapText(context, text, maxWidth){
+  const words = text.split(/\s+/);
+  const lines = [];
+  let line = '';
+  for(const w of words){
+    const test = line ? line+' '+w : w;
+    if(context.measureText(test).width > maxWidth && line){
+      lines.push(line);
+      line = w;
+    } else {
+      line = test;
+    }
+  }
+  if(line) lines.push(line);
+  return lines;
+}
+
+function drawBackground(t, w, h){
+  if(t.mode === 'diagonal'){
+    const g = ctx.createLinearGradient(0,0,w,h);
+    g.addColorStop(0, t.bg[0]);
+    g.addColorStop(.55, t.bg[1]);
+    g.addColorStop(1, t.bg[2]);
+    ctx.fillStyle = g;
+    ctx.fillRect(0,0,w,h);
+  } else if(t.mode === 'radial-light'){
+    const g = ctx.createRadialGradient(w*0.5,h*0.35,0,w*0.5,h*0.35,w*0.9);
+    g.addColorStop(0, t.bg[2]);
+    g.addColorStop(.6, t.bg[1]);
+    g.addColorStop(1, t.bg[0]);
+    ctx.fillStyle = g;
+    ctx.fillRect(0,0,w,h);
+  } else {
+    ctx.fillStyle = t.bg[0];
+    ctx.fillRect(0,0,w,h);
+    const g = ctx.createRadialGradient(w*0.5, h*(t.mode==='radial-cool'?0.3:0.28), 0, w*0.5, h*0.3, w*0.85);
+    g.addColorStop(0, t.bg[2]);
+    g.addColorStop(.5, t.bg[1]);
+    g.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0,0,w,h);
+  }
+
+  // subtle rays motif for warmth themes
+  if(t.mode === 'radial-warm' || t.mode === 'radial-light'){
+    ctx.save();
+    ctx.globalAlpha = 0.06;
+    ctx.strokeStyle = t.text;
+    ctx.lineWidth = w*0.006;
+    const cx = w*0.5, cy = h*0.32;
+    for(let i=0;i<10;i++){
+      const ang = (Math.PI*2/10)*i;
+      ctx.beginPath();
+      ctx.moveTo(cx,cy);
+      ctx.lineTo(cx+Math.cos(ang)*w*1.1, cy+Math.sin(ang)*w*1.1);
+      ctx.stroke();
+    }
+    ctx.restore();
+  }
+
+  // faint grain
+  ctx.save();
+  ctx.globalAlpha = 0.035;
+  for(let i=0;i<w*h/2600;i++){
+    ctx.fillStyle = Math.random()>0.5 ? '#000' : '#fff';
+    ctx.fillRect(Math.random()*w, Math.random()*h, 1.6, 1.6);
+  }
+  ctx.restore();
+
+  // vignette
+  const vg = ctx.createRadialGradient(w/2,h/2,h*0.3,w/2,h/2,h*0.75);
+  vg.addColorStop(0,'rgba(0,0,0,0)');
+  vg.addColorStop(1,'rgba(0,0,0,0.28)');
+  ctx.fillStyle = vg;
+  ctx.fillRect(0,0,w,h);
+}
+
+function render(){
+  const w = currentSize.w, h = currentSize.h;
+  cv.width = w; cv.height = h;
+  const t = currentTheme;
+
+  drawBackground(t, w, h);
+
+  const verse = document.getElementById('verse').value.trim() || 'Be still, and know that I am God.';
+  const ref = document.getElementById('ref').value.trim();
+  const brand = document.getElementById('brand').value.trim();
+
+  const maxTextWidth = w * 0.78;
+  let fontSize = Math.round(w * 0.075);
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'alphabetic';
+
+  let lines, lineHeight;
+  do{
+    ctx.font = `500 italic ${fontSize}px Fraunces, serif`;
+    lines = wrapText(ctx, verse, maxTextWidth);
+    lineHeight = fontSize * 1.28;
+    fontSize -= 2;
+  } while(lines.length * lineHeight > h*0.42 && fontSize > 24);
+
+  const totalTextHeight = lines.length * lineHeight;
+  let startY = h/2 - totalTextHeight/2 + lineHeight*0.35;
+
+  ctx.fillStyle = t.text;
+  ctx.font = `500 italic ${fontSize+2}px Fraunces, serif`;
+  lines.forEach((line,i)=>{
+    ctx.fillText(line, w/2, startY + i*lineHeight);
+  });
+
+  // reference
+  if(ref){
+    ctx.font = `600 ${Math.round(w*0.026)}px 'Work Sans', sans-serif`;
+    ctx.fillStyle = t.accent;
+    ctx.fillText(ref.toUpperCase(), w/2, startY + lines.length*lineHeight + w*0.045);
+  }
+
+  // gold rule + brand at bottom
+  const ruleY = h - h*0.09;
+  ctx.strokeStyle = t.accent;
+  ctx.globalAlpha = 0.85;
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(w/2 - w*0.05, ruleY);
+  ctx.lineTo(w/2 + w*0.05, ruleY);
+  ctx.stroke();
+  ctx.globalAlpha = 1;
+
+  if(brand){
+    ctx.font = `600 ${Math.round(w*0.022)}px 'Work Sans', sans-serif`;
+    ctx.fillStyle = t.text;
+    ctx.globalAlpha = 0.85;
+    ctx.fillText(brand, w/2, ruleY + w*0.045);
+    ctx.globalAlpha = 1;
+  }
+}
+
+document.getElementById('verse').addEventListener('input', render);
+document.getElementById('ref').addEventListener('input', render);
+document.getElementById('brand').addEventListener('input', render);
+
+document.getElementById('shuffle').addEventListener('click', ()=>{
+  let next;
+  do{ next = THEMES[Math.floor(Math.random()*THEMES.length)]; } while(next.key===currentTheme.key);
+  currentTheme = next;
+  document.querySelectorAll('.swatch').forEach((el,i)=>{
+    el.classList.toggle('active', THEMES[i].key===currentTheme.key);
+  });
+  render();
+});
+
+document.getElementById('download').addEventListener('click', ()=>{
+  const link = document.createElement('a');
+  link.download = `quote-graphic-${currentSize.key}-${Date.now()}.png`;
+  link.href = cv.toDataURL('image/png');
+  link.click();
+});
+
+buildSizeButtons();
+buildSwatches();
+
+document.querySelectorAll('.size-btn')[0].classList.add('active');
+
+if(document.fonts && document.fonts.ready){
+  document.fonts.ready.then(render);
+} else {
+  render();
+}
+setTimeout(render, 300);
+</script>
+</body>
+</html>
