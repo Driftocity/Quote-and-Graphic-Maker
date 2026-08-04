@@ -3,105 +3,90 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quote & Flyer Graphic Maker</title>
+<title>Grace Graphics — Devotional Image & Music Studio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#14151d;
-    --ink-2:#1c1e29;
-    --panel:#20222f;
-    --gold:#c9a227;
-    --gold-soft:#e3c866;
-    --cream:#f4efe2;
-    --muted:#9a9cae;
-    --line:#33354a;
+    --ink:#14151d; --panel:#20222f; --panel-2:#262939;
+    --gold:#c9a227; --gold-soft:#e3c866; --cream:#f4efe2;
+    --muted:#9a9cae; --line:#33354a;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
-  body{
-    background:var(--ink);
-    color:var(--cream);
-    font-family:'Work Sans',sans-serif;
-    min-height:100vh;
-    padding:20px 16px 60px;
-  }
+  body{background:var(--ink);color:var(--cream);font-family:'Work Sans',sans-serif;min-height:100vh;padding:20px 16px 70px;}
   .wrap{max-width:520px;margin:0 auto;}
 
-  header{text-align:center;margin-bottom:22px;position:relative;}
-  .eyebrow{
-    font-size:11px;letter-spacing:.18em;text-transform:uppercase;
-    color:var(--gold-soft);margin-bottom:6px;font-weight:600;
-  }
-  h1{
-    font-family:'Fraunces',serif;font-weight:600;font-size:26px;
-    margin:0 0 8px;line-height:1.15;
-  }
-  .rule{
-    width:64px;height:2px;margin:14px auto 0;
-    background:linear-gradient(90deg,transparent,var(--gold),transparent);
-  }
+  header{text-align:center;margin-bottom:22px;}
+  .eyebrow{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:6px;font-weight:600;}
+  h1{font-family:'Fraunces',serif;font-weight:600;font-size:26px;margin:0 0 8px;line-height:1.15;}
+  .rule{width:64px;height:2px;margin:14px auto 0;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
   p.sub{color:var(--muted);font-size:13.5px;margin:10px auto 0;max-width:340px;line-height:1.5;}
 
   .sizes{display:flex;gap:8px;margin:22px 0 14px;}
-  .size-btn{
-    flex:1;padding:10px 6px;border-radius:10px;border:1px solid var(--line);
-    background:var(--panel);color:var(--muted);font-size:12.5px;font-weight:600;
-    cursor:pointer;transition:.15s;text-align:center;
-  }
+  .size-btn{flex:1;padding:10px 6px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--muted);font-size:12.5px;font-weight:600;cursor:pointer;text-align:center;}
   .size-btn.active{border-color:var(--gold);color:var(--gold-soft);background:#262a1c;}
 
-  .canvas-shell{
-    position:relative;border-radius:16px;overflow:hidden;
-    box-shadow:0 20px 50px -20px rgba(0,0,0,.6), 0 0 0 1px var(--line);
-    background:#000;
-  }
+  .canvas-shell{position:relative;border-radius:16px;overflow:hidden;box-shadow:0 20px 50px -20px rgba(0,0,0,.6), 0 0 0 1px var(--line);background:#000;}
   canvas{display:block;width:100%;height:auto;}
 
-  .glow{
-    position:absolute;inset:-40%;
-    background:radial-gradient(circle at 50% 40%, rgba(201,162,39,.18), transparent 60%);
-    pointer-events:none;z-index:-1;
-  }
-
   section{margin-top:26px;}
-  label{
-    display:block;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;
-    color:var(--gold-soft);font-weight:600;margin-bottom:8px;
-  }
-  textarea, input[type=text]{
-    width:100%;background:var(--panel);border:1px solid var(--line);
-    color:var(--cream);border-radius:10px;padding:12px 14px;
-    font-family:'Work Sans',sans-serif;font-size:15px;resize:vertical;
+  label{display:block;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-soft);font-weight:600;margin-bottom:8px;}
+  textarea, input[type=text], select{
+    width:100%;background:var(--panel);border:1px solid var(--line);color:var(--cream);
+    border-radius:10px;padding:12px 14px;font-family:'Work Sans',sans-serif;font-size:15px;resize:vertical;
   }
   textarea{min-height:84px;line-height:1.4;}
-  textarea:focus, input:focus{outline:none;border-color:var(--gold);}
+  textarea:focus, input:focus, select:focus{outline:none;border-color:var(--gold);}
+  select{appearance:none;-webkit-appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--gold) 50%),linear-gradient(135deg,var(--gold) 50%,transparent 50%);background-position:calc(100% - 20px) calc(1.1em),calc(100% - 15px) calc(1.1em);background-size:5px 5px,5px 5px;background-repeat:no-repeat;}
 
-  .row2{display:flex;gap:10px;margin-top:16px;}
-  .row2 > div{flex:1;}
+  /* Verse library */
+  .verse-lib{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;}
+  .verse-row{display:flex;gap:10px;}
+  .verse-row > div{flex:1;}
+  .verse-row + .verse-row{margin-top:10px;}
+  .lib-btns{display:flex;gap:8px;margin-top:12px;}
+  button.mini{flex:1;background:var(--panel-2);border:1px solid var(--line);color:var(--cream);border-radius:8px;padding:10px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Work Sans',sans-serif;}
+  button.mini.gold{background:var(--gold);color:#1a1a12;border:none;}
+  button.mini:active{transform:scale(.97);}
 
-  .swatches{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px;}
-  .swatch{
-    width:52px;height:52px;border-radius:10px;cursor:pointer;
-    border:2px solid transparent;position:relative;flex-shrink:0;
-  }
+  /* backgrounds grid */
+  .theme-tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;margin-bottom:12px;}
+  .theme-tab{flex-shrink:0;padding:7px 13px;border-radius:100px;border:1px solid var(--line);background:var(--panel);color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;}
+  .theme-tab.active{border-color:var(--gold);color:var(--gold-soft);background:#262a1c;}
+  .swatches{display:grid;grid-template-columns:repeat(4,1fr);gap:10px 8px;}
+  .swatch{aspect-ratio:1;border-radius:10px;cursor:pointer;border:2px solid transparent;position:relative;}
   .swatch.active{border-color:var(--gold);}
-  .swatch span{
-    position:absolute;bottom:-18px;left:0;right:0;text-align:center;
-    font-size:9.5px;color:var(--muted);
-  }
+  .swatch span{position:absolute;bottom:-16px;left:0;right:0;text-align:center;font-size:8.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
+  /* music panel */
+  .music-panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;}
+  .track-list{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;}
+  .track{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel-2);cursor:pointer;}
+  .track.playing{border-color:var(--gold);background:#262a1c;}
+  .track .play-icon{width:30px;height:30px;border-radius:50%;background:var(--gold);flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#1a1a12;font-size:12px;}
+  .track.playing .play-icon{background:var(--cream);}
+  .track .meta{flex:1;}
+  .track .meta .name{font-size:13.5px;font-weight:600;}
+  .track .meta .desc{font-size:11.5px;color:var(--muted);}
+  .track .bars{display:flex;gap:2px;align-items:flex-end;height:16px;width:18px;flex-shrink:0;}
+  .track .bars i{width:3px;background:var(--muted);border-radius:2px;}
+  .track.playing .bars i{background:var(--gold-soft);animation:eq 0.9s ease-in-out infinite;}
+  .track.playing .bars i:nth-child(1){height:40%;animation-delay:0s;}
+  .track.playing .bars i:nth-child(2){height:100%;animation-delay:.15s;}
+  .track.playing .bars i:nth-child(3){height:65%;animation-delay:.3s;}
+  @keyframes eq{0%,100%{transform:scaleY(.4);}50%{transform:scaleY(1);}}
+  .track:not(.playing) .bars i{height:30%;}
+
+  .vol-row{display:flex;align-items:center;gap:10px;}
+  .vol-row label{margin:0;flex-shrink:0;}
+  input[type=range]{-webkit-appearance:none;width:100%;height:4px;border-radius:2px;background:var(--line);}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--gold);cursor:pointer;}
+  .music-note{font-size:11px;color:var(--muted);margin-top:10px;line-height:1.5;}
 
   .btnrow{display:flex;gap:10px;margin-top:30px;}
-  button.primary{
-    flex:1;background:var(--gold);color:#1a1a12;border:none;border-radius:12px;
-    padding:15px;font-size:15px;font-weight:700;cursor:pointer;
-    font-family:'Work Sans',sans-serif;letter-spacing:.02em;
-  }
-  button.ghost{
-    background:transparent;border:1px solid var(--line);color:var(--cream);
-    border-radius:12px;padding:15px 18px;font-size:14px;cursor:pointer;
-    font-weight:600;
-  }
+  button.primary{flex:1;background:var(--gold);color:#1a1a12;border:none;border-radius:12px;padding:15px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Work Sans',sans-serif;}
+  button.ghost{background:transparent;border:1px solid var(--line);color:var(--cream);border-radius:12px;padding:15px 18px;font-size:14px;cursor:pointer;font-weight:600;}
   button:active{transform:scale(.98);}
 
   footer{text-align:center;margin-top:34px;color:var(--muted);font-size:11.5px;line-height:1.6;}
@@ -111,37 +96,65 @@
 <div class="wrap">
 
   <header>
-    <div class="eyebrow">Free &amp; Instant</div>
-    <h1>Quote &amp; Flyer<br>Graphic Maker</h1>
+    <div class="eyebrow">God's Grace Studios</div>
+    <h1>Devotional Image &amp;<br>Music Studio</h1>
     <div class="rule"></div>
-    <p class="sub">Type it, pick a look, download. No design skills, no waiting — perfect for social posts, flyers, and quote graphics on the fly.</p>
+    <p class="sub">Pick a verse, pick a look, add ambient music while you create — three images before breakfast, no waiting.</p>
   </header>
 
   <div class="sizes" id="sizes"></div>
 
   <div class="canvas-shell">
-    <div class="glow"></div>
     <canvas id="cv"></canvas>
   </div>
 
-  <section>
-    <label for="verse">Quote or message</label>
-    <textarea id="verse" maxlength="220">The best way to predict the future is to create it.</textarea>
+  <section class="verse-lib">
+    <label>Bible verse library</label>
+    <div class="verse-row">
+      <div>
+        <select id="catSelect"></select>
+      </div>
+    </div>
+    <div class="verse-row">
+      <div>
+        <select id="verseSelect"></select>
+      </div>
+    </div>
+    <div class="lib-btns">
+      <button class="mini gold" id="insertVerse">Insert this verse</button>
+      <button class="mini" id="randomVerse">Surprise me</button>
+    </div>
   </section>
 
   <section>
-    <label for="ref">Attribution (optional)</label>
-    <input type="text" id="ref" maxlength="60" value="Peter Drucker">
+    <label for="verse">Verse or message text</label>
+    <textarea id="verse" maxlength="260">Be still, and know that I am God.</textarea>
   </section>
 
   <section>
-    <label>Background</label>
-    <div class="swatches" id="swatches"></div>
+    <label for="ref">Reference</label>
+    <input type="text" id="ref" maxlength="60" value="Psalm 46:10">
   </section>
 
   <section>
-    <label for="brand">Bottom brand line (optional)</label>
-    <input type="text" id="brand" maxlength="40" value="Your Name or Brand">
+    <label>Background — tap a category, tap a look</label>
+    <div class="theme-tabs" id="themeTabs"></div>
+    <div class="swatches" id="swatches" style="margin-bottom:16px;"></div>
+  </section>
+
+  <section>
+    <label for="brand">Bottom brand line</label>
+    <input type="text" id="brand" maxlength="40" value="God's Grace Studios">
+  </section>
+
+  <section class="music-panel">
+    <label>Ambient music — plays while you work, not part of the image</label>
+    <div class="track-list" id="trackList"></div>
+    <div class="vol-row">
+      <label style="margin:0;">Vol</label>
+      <input type="range" id="volSlider" min="0" max="100" value="35">
+    </div>
+    <p class="music-note">Generated live in your browser — no audio files to download, nothing to buffer. Tap a track to start, tap again to stop.</p>
   </section>
 
   <div class="btnrow">
@@ -149,46 +162,116 @@
     <button class="primary" id="download">Download image</button>
   </div>
 
-  <footer>Renders on your device. Nothing uploaded, nothing to wait on.<br>Built by Driftocity.</footer>
+  <footer>Renders on your device. Nothing uploaded, nothing to wait on.</footer>
 </div>
 
 <script>
+/* ============ SIZES ============ */
 const SIZES = [
   {key:'square', label:'Post', w:1080, h:1080},
   {key:'story',  label:'Story', w:1080, h:1920},
   {key:'flyer',  label:'Flyer', w:1200, h:1500},
 ];
-
-const THEMES = [
-  {
-    key:'morning', label:'Morning',
-    bg:['#3a2a12','#c9a227','#f4d78a'], mode:'radial-warm', text:'#fffaf0', accent:'#f4d78a'
-  },
-  {
-    key:'evening', label:'Evening',
-    bg:['#141225','#2c2451','#4a3a7a'], mode:'radial-cool', text:'#f4efe2', accent:'#c9a227'
-  },
-  {
-    key:'newday', label:'New Day',
-    bg:['#7a3b2e','#c9683f','#f0b06a'], mode:'diagonal', text:'#fff6ec', accent:'#ffe7c2'
-  },
-  {
-    key:'stillness', label:'Stillness',
-    bg:['#1f2e26','#3c5c48','#89a68a'], mode:'radial-warm', text:'#f4efe2', accent:'#d9c98a'
-  },
-  {
-    key:'faith', label:'Bold',
-    bg:['#1a0f14','#5c1f2e','#8a2f3f'], mode:'diagonal', text:'#f4efe2', accent:'#c9a227'
-  },
-  {
-    key:'simple', label:'Simple',
-    bg:['#efe9d8','#f4efe2','#fbf7ec'], mode:'radial-light', text:'#26241c', accent:'#a9871f'
-  },
-];
-
 let currentSize = SIZES[0];
-let currentTheme = THEMES[0];
 
+/* ============ VERSE LIBRARY ============ */
+const VERSES = {
+  "Comfort": [
+    {text:"The LORD is my shepherd; I shall not want.", ref:"Psalm 23:1"},
+    {text:"The LORD is close to the brokenhearted and saves the crushed in spirit.", ref:"Psalm 34:18"},
+    {text:"Come to me, all who labor and are heavy laden, and I will give you rest.", ref:"Matthew 11:28"},
+    {text:"He heals the brokenhearted and binds up their wounds.", ref:"Psalm 147:3"},
+    {text:"Praise be to the God of all comfort, who comforts us in all our troubles.", ref:"2 Corinthians 1:3-4"}
+  ],
+  "Strength": [
+    {text:"I can do all things through him who strengthens me.", ref:"Philippians 4:13"},
+    {text:"They who wait for the LORD shall renew their strength; they shall mount up with wings like eagles.", ref:"Isaiah 40:31"},
+    {text:"Be strong and courageous. Do not be afraid; the LORD your God will be with you.", ref:"Joshua 1:9"},
+    {text:"God is our refuge and strength, a very present help in trouble.", ref:"Psalm 46:1"},
+    {text:"The LORD himself goes before you and will be with you; he will never leave you.", ref:"Deuteronomy 31:6"}
+  ],
+  "Faith": [
+    {text:"Now faith is the substance of things hoped for, the evidence of things not seen.", ref:"Hebrews 11:1"},
+    {text:"For we walk by faith, not by sight.", ref:"2 Corinthians 5:7"},
+    {text:"So then faith cometh by hearing, and hearing by the word of God.", ref:"Romans 10:17"},
+    {text:"Trust in the LORD with all your heart, and lean not on your own understanding.", ref:"Proverbs 3:5-6"},
+    {text:"Whatever you ask in prayer, believe that you have received it, and it will be yours.", ref:"Mark 11:24"}
+  ],
+  "Hope": [
+    {text:"For I know the plans I have for you, plans to prosper you and not to harm you.", ref:"Jeremiah 29:11"},
+    {text:"May the God of hope fill you with all joy and peace as you trust in him.", ref:"Romans 15:13"},
+    {text:"And we know that in all things God works for the good of those who love him.", ref:"Romans 8:28"},
+    {text:"The steadfast love of the LORD never ceases; his mercies never come to an end.", ref:"Lamentations 3:22-23"},
+    {text:"Weeping may tarry for the night, but joy comes with the morning.", ref:"Psalm 30:5"}
+  ],
+  "Peace": [
+    {text:"Peace I leave with you; my peace I give you. Let not your hearts be troubled.", ref:"John 14:27"},
+    {text:"Do not be anxious about anything, but in every situation, by prayer, present your requests to God.", ref:"Philippians 4:6-7"},
+    {text:"You keep him in perfect peace whose mind is stayed on you.", ref:"Isaiah 26:3"},
+    {text:"The LORD gives strength to his people; the LORD blesses his people with peace.", ref:"Psalm 29:11"},
+    {text:"Let the peace of Christ rule in your hearts, since as members of one body you were called to peace.", ref:"Colossians 3:15"}
+  ],
+  "Love": [
+    {text:"For God so loved the world, that he gave his only Son, that whoever believes in him shall not perish.", ref:"John 3:16"},
+    {text:"Love is patient, love is kind. It does not envy, it does not boast, it is not proud.", ref:"1 Corinthians 13:4"},
+    {text:"We love because he first loved us.", ref:"1 John 4:19"},
+    {text:"But God shows his love for us in that while we were still sinners, Christ died for us.", ref:"Romans 5:8"},
+    {text:"Whoever does not love does not know God, because God is love.", ref:"1 John 4:8"}
+  ],
+  "Guidance": [
+    {text:"Your word is a lamp for my feet, a light on my path.", ref:"Psalm 119:105"},
+    {text:"In their hearts humans plan their course, but the LORD establishes their steps.", ref:"Proverbs 16:9"},
+    {text:"I will instruct you and teach you in the way you should go.", ref:"Psalm 32:8"},
+    {text:"If any of you lacks wisdom, let him ask God, who gives generously to all.", ref:"James 1:5"},
+    {text:"In all your ways submit to him, and he will make your paths straight.", ref:"Proverbs 3:6"}
+  ],
+  "Praise": [
+    {text:"Let everything that has breath praise the LORD. Praise the LORD.", ref:"Psalm 150:6"},
+    {text:"Bless the LORD, O my soul, and all that is within me, bless his holy name.", ref:"Psalm 103:1"},
+    {text:"Shout for joy to the LORD, all the earth. Worship the LORD with gladness.", ref:"Psalm 100:1-2"},
+    {text:"I will give thanks to the LORD with my whole heart; I will recount all of your wonderful deeds.", ref:"Psalm 9:1"},
+    {text:"This is the day that the LORD has made; let us rejoice and be glad in it.", ref:"Psalm 118:24"}
+  ]
+};
+
+/* ============ BACKGROUND THEMES ============ */
+const THEME_CATS = ["All","Warm","Cool","Earth","Light","Night","Bold"];
+const THEMES = [
+  {key:'morning', label:'Morning', cat:'Warm', bg:['#3a2a12','#c9a227','#f4d78a'], mode:'radial-warm', text:'#fffaf0', accent:'#f4d78a'},
+  {key:'goldenhour', label:'Golden Hour', cat:'Warm', bg:['#4a2c0f','#d98a2b','#ffcf7a'], mode:'diagonal', text:'#fff6e6', accent:'#ffe1a3'},
+  {key:'newday', label:'New Day', cat:'Warm', bg:['#7a3b2e','#c9683f','#f0b06a'], mode:'diagonal', text:'#fff6ec', accent:'#ffe7c2'},
+  {key:'rosedawn', label:'Rose Dawn', cat:'Warm', bg:['#4a1f2b','#c9557a','#f2a8b8'], mode:'radial-warm', text:'#fff0f4', accent:'#f7c9d4'},
+  {key:'ember', label:'Ember', cat:'Warm', bg:['#2b0e08','#8a2a12','#e0632a'], mode:'radial-warm', text:'#fff0e8', accent:'#ffb98a'},
+  {key:'harvest', label:'Harvest', cat:'Warm', bg:['#3d2a0c','#9c6b1f','#e0b45c'], mode:'diagonal', text:'#fff8e8', accent:'#f4d78a'},
+
+  {key:'evening', label:'Evening', cat:'Cool', bg:['#141225','#2c2451','#4a3a7a'], mode:'radial-cool', text:'#f4efe2', accent:'#c9a227'},
+  {key:'sanctuary', label:'Sanctuary', cat:'Cool', bg:['#180f26','#4a2c6e','#7a4fa3'], mode:'radial-cool', text:'#f4efe2', accent:'#e3c866'},
+  {key:'royal', label:'Royal', cat:'Cool', bg:['#0c1530','#1e3a6e','#3a5fa0'], mode:'radial-cool', text:'#f4efe2', accent:'#e3c866'},
+  {key:'ocean', label:'Ocean', cat:'Cool', bg:['#04141f','#0d3a4f','#1c6e8c'], mode:'waves', text:'#eaf7fa', accent:'#8ce9de'},
+  {key:'vineyard', label:'Vineyard', cat:'Cool', bg:['#1a0d1f','#4a1e4f','#7a3573'], mode:'diagonal', text:'#f4efe2', accent:'#d9a3d0'},
+
+  {key:'stillness', label:'Stillness', cat:'Earth', bg:['#1f2e26','#3c5c48','#89a68a'], mode:'radial-warm', text:'#f4efe2', accent:'#d9c98a'},
+  {key:'garden', label:'Garden', cat:'Earth', bg:['#1a2e12','#4a7a2e','#a3c95c'], mode:'radial-warm', text:'#f5fbe8', accent:'#d9f0a3'},
+  {key:'desert', label:'Desert', cat:'Earth', bg:['#3a2410','#a3763f','#e0c28a'], mode:'diagonal', text:'#fff8ec', accent:'#f4e3b8'},
+  {key:'olive', label:'Olive Grove', cat:'Earth', bg:['#20260f','#4f5c28','#8a9c5c'], mode:'radial-warm', text:'#f5f7e8', accent:'#d4dba3'},
+
+  {key:'simple', label:'Simple', cat:'Light', bg:['#efe9d8','#f4efe2','#fbf7ec'], mode:'radial-light', text:'#26241c', accent:'#a9871f'},
+  {key:'cloudscape', label:'Cloudscape', cat:'Light', bg:['#c9dbe8','#e6eff5','#fbfdfe'], mode:'radial-light', text:'#1c2733', accent:'#5c7a94'},
+  {key:'snow', label:'Snow', cat:'Light', bg:['#d3e6ef','#eaf4f8','#ffffff'], mode:'radial-light', text:'#1c3040', accent:'#4f7d94'},
+  {key:'linen', label:'Linen', cat:'Light', bg:['#e3d9c2','#efe6d4','#f8f2e6'], mode:'diagonal', text:'#332b1c', accent:'#8a6b2f'},
+
+  {key:'midnight', label:'Midnight', cat:'Night', bg:['#05060f','#131a3a','#22306e'], mode:'stars', text:'#f4efe2', accent:'#e3c866'},
+  {key:'twilight', label:'Twilight', cat:'Night', bg:['#0f0a1f','#2e1a4a','#5a2e7a'], mode:'stars', text:'#f4efe2', accent:'#c9a227'},
+  {key:'starlit', label:'Starlit', cat:'Night', bg:['#04070d','#0e1a2e','#1c3255'], mode:'stars', text:'#eaf1fa', accent:'#8ce9de'},
+
+  {key:'faith', label:'Bold Faith', cat:'Bold', bg:['#1a0f14','#5c1f2e','#8a2f3f'], mode:'diagonal', text:'#f4efe2', accent:'#c9a227'},
+  {key:'crimson', label:'Crimson', cat:'Bold', bg:['#180508','#5c0f18','#a3182c'], mode:'radial-warm', text:'#fff0f0', accent:'#f4b8b8'},
+  {key:'onyxgold', label:'Onyx & Gold', cat:'Bold', bg:['#0a0a0a','#1c1c1c','#3a3120'], mode:'radial-cool', text:'#f4efe2', accent:'#e3c866'},
+];
+let currentTheme = THEMES[0];
+let currentCat = 'All';
+
+/* ============ CANVAS ============ */
 const cv = document.getElementById('cv');
 const ctx = cv.getContext('2d');
 
@@ -200,8 +283,21 @@ function buildSizeButtons(){
     b.textContent = s.label + ' ' + s.w + '×' + s.h;
     b.onclick = ()=>{ currentSize = s;
       document.querySelectorAll('.size-btn').forEach(x=>x.classList.remove('active'));
-      b.classList.add('active');
-      render();
+      b.classList.add('active'); render();
+    };
+    el.appendChild(b);
+  });
+}
+
+function buildThemeTabs(){
+  const el = document.getElementById('themeTabs');
+  THEME_CATS.forEach(c=>{
+    const b = document.createElement('div');
+    b.className = 'theme-tab' + (c===currentCat?' active':'');
+    b.textContent = c;
+    b.onclick = ()=>{ currentCat = c;
+      document.querySelectorAll('.theme-tab').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active'); buildSwatches();
     };
     el.appendChild(b);
   });
@@ -209,7 +305,9 @@ function buildSizeButtons(){
 
 function buildSwatches(){
   const el = document.getElementById('swatches');
-  THEMES.forEach(t=>{
+  el.innerHTML = '';
+  const list = currentCat==='All' ? THEMES : THEMES.filter(t=>t.cat===currentCat);
+  list.forEach(t=>{
     const s = document.createElement('div');
     s.className = 'swatch' + (t.key===currentTheme.key?' active':'');
     s.style.background = `linear-gradient(135deg, ${t.bg[0]}, ${t.bg[1]}, ${t.bg[2]})`;
@@ -218,8 +316,7 @@ function buildSwatches(){
     s.appendChild(lbl);
     s.onclick = ()=>{ currentTheme = t;
       document.querySelectorAll('.swatch').forEach(x=>x.classList.remove('active'));
-      s.classList.add('active');
-      render();
+      s.classList.add('active'); render();
     };
     el.appendChild(s);
   });
@@ -227,16 +324,11 @@ function buildSwatches(){
 
 function wrapText(context, text, maxWidth){
   const words = text.split(/\s+/);
-  const lines = [];
-  let line = '';
+  const lines = []; let line = '';
   for(const w of words){
     const test = line ? line+' '+w : w;
-    if(context.measureText(test).width > maxWidth && line){
-      lines.push(line);
-      line = w;
-    } else {
-      line = test;
-    }
+    if(context.measureText(test).width > maxWidth && line){ lines.push(line); line = w; }
+    else line = test;
   }
   if(line) lines.push(line);
   return lines;
@@ -245,123 +337,285 @@ function wrapText(context, text, maxWidth){
 function drawBackground(t, w, h){
   if(t.mode === 'diagonal'){
     const g = ctx.createLinearGradient(0,0,w,h);
-    g.addColorStop(0, t.bg[0]);
-    g.addColorStop(.55, t.bg[1]);
-    g.addColorStop(1, t.bg[2]);
-    ctx.fillStyle = g;
-    ctx.fillRect(0,0,w,h);
+    g.addColorStop(0,t.bg[0]); g.addColorStop(.55,t.bg[1]); g.addColorStop(1,t.bg[2]);
+    ctx.fillStyle = g; ctx.fillRect(0,0,w,h);
   } else if(t.mode === 'radial-light'){
     const g = ctx.createRadialGradient(w*0.5,h*0.35,0,w*0.5,h*0.35,w*0.9);
-    g.addColorStop(0, t.bg[2]);
-    g.addColorStop(.6, t.bg[1]);
-    g.addColorStop(1, t.bg[0]);
-    ctx.fillStyle = g;
-    ctx.fillRect(0,0,w,h);
+    g.addColorStop(0,t.bg[2]); g.addColorStop(.6,t.bg[1]); g.addColorStop(1,t.bg[0]);
+    ctx.fillStyle = g; ctx.fillRect(0,0,w,h);
+  } else if(t.mode === 'waves'){
+    ctx.fillStyle = t.bg[0]; ctx.fillRect(0,0,w,h);
+    const bands = [[t.bg[1],0.55,.10],[t.bg[2],0.7,.16],[t.bg[1],0.85,.08]];
+    bands.forEach(([color,yBase,amp],i)=>{
+      ctx.beginPath();
+      ctx.moveTo(0,h);
+      for(let x=0;x<=w;x+=w/40){
+        const y = h*yBase + Math.sin((x/w)*Math.PI*2 + i*1.7)*h*amp;
+        ctx.lineTo(x,y);
+      }
+      ctx.lineTo(w,h); ctx.closePath();
+      ctx.globalAlpha = 0.55;
+      ctx.fillStyle = color;
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    });
+  } else if(t.mode === 'stars'){
+    ctx.fillStyle = t.bg[0]; ctx.fillRect(0,0,w,h);
+    const g = ctx.createRadialGradient(w*0.5,h*0.25,0,w*0.5,h*0.25,w*0.9);
+    g.addColorStop(0,t.bg[2]); g.addColorStop(.55,t.bg[1]); g.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle = g; ctx.fillRect(0,0,w,h);
+    let seed = 42;
+    const rand = ()=>{ seed = (seed*9301+49297)%233280; return seed/233280; };
+    for(let i=0;i<w*h/3200;i++){
+      const x = rand()*w, y = rand()*h*0.8, r = rand()*1.8+0.4;
+      ctx.globalAlpha = rand()*0.6+0.3;
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
   } else {
-    ctx.fillStyle = t.bg[0];
-    ctx.fillRect(0,0,w,h);
-    const g = ctx.createRadialGradient(w*0.5, h*(t.mode==='radial-cool'?0.3:0.28), 0, w*0.5, h*0.3, w*0.85);
-    g.addColorStop(0, t.bg[2]);
-    g.addColorStop(.5, t.bg[1]);
-    g.addColorStop(1, 'rgba(0,0,0,0)');
-    ctx.fillStyle = g;
-    ctx.fillRect(0,0,w,h);
+    ctx.fillStyle = t.bg[0]; ctx.fillRect(0,0,w,h);
+    const g = ctx.createRadialGradient(w*0.5,h*0.3,0,w*0.5,h*0.3,w*0.85);
+    g.addColorStop(0,t.bg[2]); g.addColorStop(.5,t.bg[1]); g.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle = g; ctx.fillRect(0,0,w,h);
   }
 
-  // subtle rays motif for warmth themes
-  if(t.mode === 'radial-warm' || t.mode === 'radial-light'){
-    ctx.save();
-    ctx.globalAlpha = 0.06;
-    ctx.strokeStyle = t.text;
-    ctx.lineWidth = w*0.006;
-    const cx = w*0.5, cy = h*0.32;
+  if(t.mode==='radial-warm' || t.mode==='radial-light'){
+    ctx.save(); ctx.globalAlpha = 0.06; ctx.strokeStyle = t.text; ctx.lineWidth = w*0.006;
+    const cx=w*0.5, cy=h*0.32;
     for(let i=0;i<10;i++){
-      const ang = (Math.PI*2/10)*i;
-      ctx.beginPath();
-      ctx.moveTo(cx,cy);
+      const ang=(Math.PI*2/10)*i;
+      ctx.beginPath(); ctx.moveTo(cx,cy);
       ctx.lineTo(cx+Math.cos(ang)*w*1.1, cy+Math.sin(ang)*w*1.1);
       ctx.stroke();
     }
     ctx.restore();
   }
 
-  // faint grain
-  ctx.save();
-  ctx.globalAlpha = 0.035;
+  ctx.save(); ctx.globalAlpha = 0.035;
   for(let i=0;i<w*h/2600;i++){
     ctx.fillStyle = Math.random()>0.5 ? '#000' : '#fff';
     ctx.fillRect(Math.random()*w, Math.random()*h, 1.6, 1.6);
   }
   ctx.restore();
 
-  // vignette
   const vg = ctx.createRadialGradient(w/2,h/2,h*0.3,w/2,h/2,h*0.75);
-  vg.addColorStop(0,'rgba(0,0,0,0)');
-  vg.addColorStop(1,'rgba(0,0,0,0.28)');
-  ctx.fillStyle = vg;
-  ctx.fillRect(0,0,w,h);
+  vg.addColorStop(0,'rgba(0,0,0,0)'); vg.addColorStop(1,'rgba(0,0,0,0.28)');
+  ctx.fillStyle = vg; ctx.fillRect(0,0,w,h);
 }
 
 function render(){
   const w = currentSize.w, h = currentSize.h;
   cv.width = w; cv.height = h;
   const t = currentTheme;
-
   drawBackground(t, w, h);
 
   const verse = document.getElementById('verse').value.trim() || 'Be still, and know that I am God.';
   const ref = document.getElementById('ref').value.trim();
   const brand = document.getElementById('brand').value.trim();
 
-  const maxTextWidth = w * 0.78;
-  let fontSize = Math.round(w * 0.075);
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'alphabetic';
-
+  const maxTextWidth = w*0.78;
+  let fontSize = Math.round(w*0.072);
+  ctx.textAlign='center'; ctx.textBaseline='alphabetic';
   let lines, lineHeight;
   do{
     ctx.font = `500 italic ${fontSize}px Fraunces, serif`;
     lines = wrapText(ctx, verse, maxTextWidth);
-    lineHeight = fontSize * 1.28;
+    lineHeight = fontSize*1.28;
     fontSize -= 2;
-  } while(lines.length * lineHeight > h*0.42 && fontSize > 24);
+  } while(lines.length*lineHeight > h*0.44 && fontSize > 20);
 
-  const totalTextHeight = lines.length * lineHeight;
+  const totalTextHeight = lines.length*lineHeight;
   let startY = h/2 - totalTextHeight/2 + lineHeight*0.35;
 
   ctx.fillStyle = t.text;
   ctx.font = `500 italic ${fontSize+2}px Fraunces, serif`;
-  lines.forEach((line,i)=>{
-    ctx.fillText(line, w/2, startY + i*lineHeight);
-  });
+  lines.forEach((line,i)=>ctx.fillText(line, w/2, startY+i*lineHeight));
 
-  // reference
   if(ref){
     ctx.font = `600 ${Math.round(w*0.026)}px 'Work Sans', sans-serif`;
     ctx.fillStyle = t.accent;
     ctx.fillText(ref.toUpperCase(), w/2, startY + lines.length*lineHeight + w*0.045);
   }
 
-  // gold rule + brand at bottom
   const ruleY = h - h*0.09;
-  ctx.strokeStyle = t.accent;
-  ctx.globalAlpha = 0.85;
-  ctx.lineWidth = 2;
-  ctx.beginPath();
-  ctx.moveTo(w/2 - w*0.05, ruleY);
-  ctx.lineTo(w/2 + w*0.05, ruleY);
-  ctx.stroke();
+  ctx.strokeStyle = t.accent; ctx.globalAlpha = 0.85; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(w/2-w*0.05,ruleY); ctx.lineTo(w/2+w*0.05,ruleY); ctx.stroke();
   ctx.globalAlpha = 1;
 
   if(brand){
     ctx.font = `600 ${Math.round(w*0.022)}px 'Work Sans', sans-serif`;
-    ctx.fillStyle = t.text;
-    ctx.globalAlpha = 0.85;
+    ctx.fillStyle = t.text; ctx.globalAlpha = 0.85;
     ctx.fillText(brand, w/2, ruleY + w*0.045);
     ctx.globalAlpha = 1;
   }
 }
 
+/* ============ VERSE LIBRARY UI ============ */
+function buildVerseSelectors(){
+  const catSel = document.getElementById('catSelect');
+  const verseSel = document.getElementById('verseSelect');
+  Object.keys(VERSES).forEach(cat=>{
+    const o = document.createElement('option');
+    o.value = cat; o.textContent = cat;
+    catSel.appendChild(o);
+  });
+  function populateVerses(){
+    verseSel.innerHTML='';
+    VERSES[catSel.value].forEach((v,i)=>{
+      const o = document.createElement('option');
+      o.value = i;
+      o.textContent = v.text.length>52 ? v.text.slice(0,52)+'…' : v.text;
+      verseSel.appendChild(o);
+    });
+  }
+  catSel.addEventListener('change', populateVerses);
+  populateVerses();
+
+  document.getElementById('insertVerse').addEventListener('click', ()=>{
+    const v = VERSES[catSel.value][verseSel.value];
+    document.getElementById('verse').value = v.text;
+    document.getElementById('ref').value = v.ref;
+    render();
+  });
+
+  document.getElementById('randomVerse').addEventListener('click', ()=>{
+    const cats = Object.keys(VERSES);
+    const cat = cats[Math.floor(Math.random()*cats.length)];
+    const list = VERSES[cat];
+    const v = list[Math.floor(Math.random()*list.length)];
+    document.getElementById('verse').value = v.text;
+    document.getElementById('ref').value = v.ref;
+    catSel.value = cat; populateVerses();
+    render();
+  });
+}
+
+/* ============ AMBIENT MUSIC (synthesized, no audio files) ============ */
+let audioCtx = null;
+let activeTrackKey = null;
+let activeNodes = [];
+let masterGain = null;
+
+const TRACKS = [
+  {key:'pad', name:'Gentle Pad', desc:'Warm sustained chords', chord:[130.81,164.81,196.00,261.63], wave:'sine', lfoRate:0.06},
+  {key:'strings', name:'Soft Strings', desc:'Slow evolving strings', chord:[146.83,174.61,220.00,293.66], wave:'sawtooth', lfoRate:0.08, filter:true},
+  {key:'chimes', name:'Gentle Chimes', desc:'Sparse bell tones', chord:[261.63,329.63,392.00,523.25], wave:'triangle', lfoRate:0.15, chimes:true},
+  {key:'drone', name:'Peaceful Drone', desc:'Deep, steady, meditative', chord:[87.31,130.81,174.61], wave:'sine', lfoRate:0.04},
+];
+
+function ensureAudio(){
+  if(!audioCtx){
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    masterGain = audioCtx.createGain();
+    masterGain.gain.value = document.getElementById('volSlider').value/100 * 0.5;
+    masterGain.connect(audioCtx.destination);
+  }
+  if(audioCtx.state === 'suspended') audioCtx.resume();
+}
+
+function stopTrack(){
+  activeNodes.forEach(n=>{
+    try{
+      if(n.stop) n.stop();
+      if(n.disconnect) n.disconnect();
+    }catch(e){}
+  });
+  activeNodes = [];
+  activeTrackKey = null;
+  document.querySelectorAll('.track').forEach(el=>el.classList.remove('playing'));
+}
+
+function playTrack(track){
+  ensureAudio();
+  stopTrack();
+  activeTrackKey = track.key;
+
+  const now = audioCtx.currentTime;
+
+  if(track.chimes){
+    // sparse plucked tones, re-triggered on interval
+    const playChime = ()=>{
+      if(activeTrackKey !== track.key) return;
+      const freq = track.chord[Math.floor(Math.random()*track.chord.length)];
+      const osc = audioCtx.createOscillator();
+      const g = audioCtx.createGain();
+      osc.type = track.wave; osc.frequency.value = freq;
+      osc.connect(g); g.connect(masterGain);
+      const t0 = audioCtx.currentTime;
+      g.gain.setValueAtTime(0, t0);
+      g.gain.linearRampToValueAtTime(0.35, t0+0.05);
+      g.gain.exponentialRampToValueAtTime(0.001, t0+2.2);
+      osc.start(t0); osc.stop(t0+2.3);
+      setTimeout(playChime, 1400 + Math.random()*1800);
+    };
+    playChime();
+    activeNodes.push({stop:()=>{}, disconnect:()=>{}});
+  } else {
+    track.chord.forEach((freq,i)=>{
+      const osc = audioCtx.createOscillator();
+      const g = audioCtx.createGain();
+      osc.type = track.wave;
+      osc.frequency.value = freq;
+
+      let node = osc;
+      if(track.filter){
+        const filt = audioCtx.createBiquadFilter();
+        filt.type = 'lowpass';
+        filt.frequency.value = 900;
+        osc.connect(filt);
+        node = filt;
+      }
+      node.connect(g);
+      g.connect(masterGain);
+
+      const baseVol = 0.09 - i*0.012;
+      g.gain.setValueAtTime(0, now);
+      g.gain.linearRampToValueAtTime(Math.max(baseVol,0.02), now + 2.5);
+
+      // slow LFO on gain for a "breathing" pad feel
+      const lfo = audioCtx.createOscillator();
+      const lfoGain = audioCtx.createGain();
+      lfo.frequency.value = track.lfoRate + i*0.01;
+      lfoGain.gain.value = baseVol*0.35;
+      lfo.connect(lfoGain);
+      lfoGain.connect(g.gain);
+      lfo.start(now);
+
+      osc.start(now);
+      activeNodes.push(osc, lfo, g, lfoGain);
+    });
+  }
+}
+
+function buildTrackList(){
+  const el = document.getElementById('trackList');
+  TRACKS.forEach(track=>{
+    const row = document.createElement('div');
+    row.className = 'track';
+    row.innerHTML = `
+      <div class="play-icon">▶</div>
+      <div class="meta"><div class="name">${track.name}</div><div class="desc">${track.desc}</div></div>
+      <div class="bars"><i></i><i></i><i></i></div>
+    `;
+    row.addEventListener('click', ()=>{
+      if(activeTrackKey === track.key){
+        stopTrack();
+      } else {
+        playTrack(track);
+        document.querySelectorAll('.track').forEach(r=>r.classList.remove('playing'));
+        row.classList.add('playing');
+      }
+    });
+    el.appendChild(row);
+  });
+}
+
+document.getElementById('volSlider').addEventListener('input', (e)=>{
+  if(masterGain) masterGain.gain.value = e.target.value/100 * 0.5;
+});
+
+/* ============ WIRE UP ============ */
 document.getElementById('verse').addEventListener('input', render);
 document.getElementById('ref').addEventListener('input', render);
 document.getElementById('brand').addEventListener('input', render);
@@ -370,29 +624,26 @@ document.getElementById('shuffle').addEventListener('click', ()=>{
   let next;
   do{ next = THEMES[Math.floor(Math.random()*THEMES.length)]; } while(next.key===currentTheme.key);
   currentTheme = next;
-  document.querySelectorAll('.swatch').forEach((el,i)=>{
-    el.classList.toggle('active', THEMES[i].key===currentTheme.key);
-  });
+  buildSwatches();
   render();
 });
 
 document.getElementById('download').addEventListener('click', ()=>{
   const link = document.createElement('a');
-  link.download = `quote-graphic-${currentSize.key}-${Date.now()}.png`;
+  link.download = `grace-graphic-${currentSize.key}-${Date.now()}.png`;
   link.href = cv.toDataURL('image/png');
   link.click();
 });
 
 buildSizeButtons();
+buildThemeTabs();
 buildSwatches();
+buildVerseSelectors();
+buildTrackList();
 
 document.querySelectorAll('.size-btn')[0].classList.add('active');
 
-if(document.fonts && document.fonts.ready){
-  document.fonts.ready.then(render);
-} else {
-  render();
-}
+if(document.fonts && document.fonts.ready){ document.fonts.ready.then(render); } else { render(); }
 setTimeout(render, 300);
 </script>
 </body>
